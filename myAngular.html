@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="the_first_app">
+<head>
+	<title>Practice</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>	
+
+</head>
+<body>
+<div ng-controller="my_controller">
+	<input type="text" name="search" ng-model="searchme"/>{{searchme}}
+	<br/>
+	<ul><li ng-repeat="my_value in infomation | filter:searchme | orderBy:'passengers'">
+	Destination  for {{my_value.destination | uppercase}} |  
+	Number of Passengers {{my_value.passengers }} | 
+	Time of Departure {{my_value.time }} </li></ul>
+
+	<hr/>
+	<p>Add new Destination</p>
+	<input type="text" name="add_dest" ng-model="new_Destination.conty" placeholder="dest" />
+	<br/>
+	<input type="text" name="add_time" ng-model="new_Destination.time"/>
+	<br/>
+	<input type="text" name="add_pass" ng-model="new_Destination.pass"/>
+	<br/>
+	<button ng-click="addInfo();">Add to list</button>
+
+</div>
+<script type="text/javascript">
+	var my_mod = angular.module("the_first_app" , []);
+
+	my_mod.controller("my_controller" , function($scope){
+		$scope.infomation=[{destination:"London" , time:"07:20" , passengers:120},
+		{destination:"New York" , time:"17:20" , passengers:100},
+		{destination:"Syden" , time:"00:20" , passengers:500}];
+
+		$scope.addInfo = function(){
+			$scope.infomation.push({
+				destination:$scope.new_Destination.conty , 
+				time:$scope.new_Destination.time , 
+				passengers:$scope.new_Destination.pass 
+			});
+		};
+
+	});
+</script>
+</body>
+</html>
